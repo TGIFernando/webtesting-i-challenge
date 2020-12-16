@@ -14,7 +14,13 @@ function success(item) {
 }
 
 function fail(item) {
-  return { ...item };
+  if (item.enchancement === 20){
+    return {...item, enchancement: item.enchancement - 5}
+  } else if (item.enchancement > 10) {
+    return {...item, enchancement: item.enchancement - 3}
+  } else {
+    return {... item, enchancement: item.enchancement - 1}
+  }
 }
 
 function repair(item) {

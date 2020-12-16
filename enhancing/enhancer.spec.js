@@ -37,3 +37,29 @@ describe('tests success method', () => {
         expect(kitana).toHaveProperty("enchancement", 3)
     })
 })
+
+describe("it tests the fail method", () => {
+    it("checks if method is there", () => {
+        expect(enhancer.fail).toBeDefined()
+    })
+    it("checks if fail works with enchancement level 20", () => {
+        kitana = {...kitana, enchancement: 20}
+        expect(enhancer.fail(kitana)).toHaveProperty("enchancement", 15)
+    })
+    it("chaecks if fail works between levels 11 and 19", () => {
+        kitana = {...kitana, enchancement: 19}
+        expect(enhancer.fail(kitana)).toHaveProperty("enchancement", 16)
+        kitana = {...kitana, enchancement: 11}
+        expect(enhancer.fail(kitana)).toHaveProperty("enchancement", 8)
+    })
+    it("checks if fail works with enchancement level 10 or under", () => {
+        kitana = {...kitana, enchancement: 10}
+        expect(enhancer.fail(kitana)).toHaveProperty("enchancement", 9)
+        kitana = enhancer.fail(kitana)
+        expect(kitana).toHaveProperty("enchancement", 9)
+        kitana = enhancer.fail(kitana)
+        expect(kitana).toHaveProperty("enchancement", 8)
+        kitana = enhancer.fail(kitana)
+        expect(kitana).toHaveProperty("enchancement", 7)
+    })
+})
